@@ -1,75 +1,101 @@
 {% extends 'base.html' %}
-{% block title %} REGISTER {% endblock%}
-{% block content%}
+{% block title %} Programar Reuniones {% endblock %}
+{% block content %}
+{% include 'navbar.html' %}
+<br><br><br>
+<section class="vh-100" style="background-color: #f0f0f0;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: #ffffff;">
+                    <div class="card-body p-4 p-lg-5 text-black">
+                        <h2 class="text-center mb-4" style="color: #00bcd4;">Programar Reunión</h2>
+                        <form id="meeting-form">
+                            <div class="form-outline mb-4">
+                                <input type="text" id="meeting-title" class="form-control form-control-lg" placeholder=" " required />
+                                <label class="form-label" for="meeting-title">Título de la Reunión</label>
+                            </div>
 
-<section class="text-center text-lg-start">
-    <style>
-      .cascading-right {
-        margin-right: -50px;
-      }
-  
-      @media (max-width: 991.98px) {
-        .cascading-right {
-          margin-right: 0;
-        }
-      }
-    </style>
+                            <div class="form-outline mb-4">
+                                <input type="date" id="meeting-date" class="form-control form-control-lg" required />
+                                <label class="form-label" for="meeting-date">Fecha</label>
+                            </div>
 
-    <div class="container py-4">
-      <div class="row g-0 align-items-center">
-        <div class="col-lg-6 mb-5 mb-lg-0">
-          <div class="card cascading-right bg-body-tertiary" style="
-              backdrop-filter: blur(30px);
-              ">
-            <div class="card-body p-5 shadow-5 text-center">
-              <h2 class="fw-bold mb-5">Registrate</h2>
-              <form>
+                            <div class="form-outline mb-4">
+                                <input type="time" id="meeting-time" class="form-control form-control-lg" required />
+                                <label class="form-label" for="meeting-time">Hora</label>
+                            </div>
 
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div data-mdb-input-init class="form-outline">
-                      <input type="text" id="form3Example1" class="form-control" />
-                      <label class="form-label" for="form3Example1">Nombres</label>
+                            <div class="form-outline mb-4">
+                                <textarea id="meeting-description" class="form-control form-control-lg" rows="4" placeholder=" " required></textarea>
+                                <label class="form-label" for="meeting-description">Descripción</label>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input type="url" id="meeting-link" class="form-control form-control-lg" placeholder=" " required />
+                                <label class="form-label" for="meeting-link">Enlace de la Reunión</label>
+                            </div>
+
+                            <div class="text-center mb-4">
+                                <button type="submit" class="btn btn-lg" style="background-color: #00bcd4; color: white; border-radius: 0.5rem; border: none;">Agregar Reunión</button>
+                            </div>
+                        </form>
+
+                        <h3 class="text-center mb-4" style="color: #00bcd4;">Reuniones Programadas</h3>
+                        <div id="meetings-list">
+                            <!-- Reuniones se agregarán aquí dinámicamente -->
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-md-6 mb-4">
-                    <div data-mdb-input-init class="form-outline">
-                      <input type="text" id="form3Example2" class="form-control" />
-                      <label class="form-label" for="form3Example2">Apellidos</label>
-                    </div>
-                  </div>
                 </div>
-
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="email" id="form3Example3" class="form-control" />
-                  <label class="form-label" for="form3Example3">Correo electronico</label>
-                </div>
-  
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="password" id="form3Example4" class="form-control" />
-                    <label class="form-label" for="form3Example4">Contraseña</label>
-                </div>
-
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="password" id="form3Example4" class="form-control" />
-                    <label class="form-label" for="form3Example4">Repita la contraseña</label>
-                </div>
-  
-                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
-                  Registrarse
-                </button>
-  
-              </form>
             </div>
-          </div>
         </div>
-  
-        <div class="col-lg-6 mb-5 mb-lg-0">
-          <img src="https://img.freepik.com/foto-gratis/sitio-reunion-oficina_1170-1966.jpg?w=360&t=st=1725132693~exp=1725133293~hmac=c1262593c7fd31fdbc94bd4bef9f1566b79e8063797334e386f8eac05d4be14e  " class="w-100 rounded-4 shadow-4"
-            alt="" />
-        </div>
-      </div>
     </div>
+</section>
 
-  </section>
-{% endblock%}
+<script>
+document.getElementById('meeting-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Validar que todos los campos estén completos
+    const title = document.getElementById('meeting-title').value.trim();
+    const date = document.getElementById('meeting-date').value.trim();
+    const time = document.getElementById('meeting-time').value.trim();
+    const description = document.getElementById('meeting-description').value.trim();
+    const link = document.getElementById('meeting-link').value.trim();
+    
+    if (!title || !date || !time || !description || !link) {
+        alert('Por favor, complete todos los campos.');
+        return;
+    }
+    
+    // Crear un nuevo bloque de reunión
+    const meetingsList = document.getElementById('meetings-list');
+    const meetingBlock = document.createElement('div');
+    meetingBlock.classList.add('meeting-block');
+    meetingBlock.style.backgroundColor = '#ffffff';
+    meetingBlock.style.border = '1px solid #ddd';
+    meetingBlock.style.borderRadius = '0.5rem';
+    meetingBlock.style.padding = '10px';
+    meetingBlock.style.marginBottom = '10px';
+    
+    meetingBlock.innerHTML = `
+        <h5>${title}</h5>
+        <p><strong>Fecha:</strong> ${date}</p>
+        <p><strong>Hora:</strong> ${time}</p>
+        <p><strong>Descripción:</strong> ${description}</p>
+        <p><strong>Enlace:</strong> <a href="${link}" target="_blank" style="color: #00bcd4;">${link}</a></p>
+    `;
+    
+    meetingsList.appendChild(meetingBlock);
+    
+    // Limpiar el formulario
+    document.getElementById('meeting-form').reset();
+});
+</script>
+
+<style>
+.meeting-block {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+</style>
+{% endblock %}
