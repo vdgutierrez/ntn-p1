@@ -2,7 +2,7 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/index')
 def index():
     return render_template('index.html')
 
@@ -14,6 +14,10 @@ def login():
 def register():
     return render_template('register.html')
 
+
 @app.route('/FAQ')
-def register():
+def faq():
     return render_template('FAQ.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
