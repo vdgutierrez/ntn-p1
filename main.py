@@ -1,5 +1,4 @@
-from flask import Flask, render_template
-
+from flask import Flask, render_template, request
 app = Flask(__name__)
 
 @app.route('/')
@@ -14,10 +13,19 @@ def login():
 def register():
     return render_template('register.html')
 
-
-@app.route('/FAQ')
-def faq():
-    return render_template('FAQ.html')
+@app.route('/question')
+def question():
+    return render_template('question.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+@app.route('/login_user', method=['POST'])
+def login_user():
+    print(request.method)
+    if request.methods == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        print(username, password)
+
+    return render_template('questions.html')
