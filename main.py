@@ -17,15 +17,26 @@ def register():
 def question():
     return render_template('question.html')
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
-@app.route('/login_user', method=['POST'])
+@app.route('/login_user', methods=['POST'])
 def login_user():
-    print(request.method)
-    if request.methods == 'POST':
+    if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        print(username, password)
+        print(username)
+        print(password)
+    return 'received'
 
-    return render_template('questions.html')
+
+
+
+
+
+
+
+
+
+
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
