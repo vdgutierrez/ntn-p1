@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}REGISTRO{% endblock %}
+{% block content %}
+{% include 'admin/navbar_admin.html' %}
+<br><br><br>
+<section class="vh-100" style="background-color: #000000;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: #ffffff;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <img src="https://previews.123rf.com/images/vectorknight/vectorknight1712/vectorknight171200020/91261384-conferencia-de-negocios-reuni%C3%B3n-de-negocios-hombre-en-la-tribuna-frente-a-la-audiencia-orador.jpg" width="8000" height="500"
+                                 alt="registration form" class="img-fluid" style="border-radius: 1rem 1rem 1rem 1rem; border: 2px solid #00bcd4;" />
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
+
+                                <form action="{{ url_for('conferencia') }}" method="post">
+
+                                    <div class="d-flex align-items-center mb-3 pb-1">
+                                        <span class="h1 fw-bold mb-0" style="color: #00bcd4;">Registro</span>
+                                    </div>
+
+
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="nombre" name="nombre" class="form-control form-control-lg" placeholder="nombres " required />
+                                        <label class="form-label" for="nombre">Nombres</label>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="apellido" name="apellido" class="form-control form-control-lg" placeholder="apellidos " required />
+                                        <label class="form-label" for="apellido">Apellidos</label>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="correo" name="correo" class="form-control form-control-lg" placeholder=" correos" required />
+                                        <label class="form-label" for="correo">Correo</label>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="contraseña" name="contraseña" class="form-control form-control-lg" placeholder="contraseña " required />
+                                        <label class="form-label" for="contraseña">Contraseña</label>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <select id="rol" name="rol" class="form-control form-control-lg" required>
+                                            <option value="" disabled selected>Seleccione un rol</option>
+                                            <option value="organizador">Organizador</option>
+                                            <option value="orador">Orador</option>
+                                            <option value="asistente">Asistente</option>
+                                        </select>
+                                        <label class="form-label" for="rol">Rol</label>
+                                    </div>
+
+                                    <div class="pt-1 mb-4">
+                                        <button type="submit" class="btn btn-lg" style="background-color: #00bcd4; color: white; border-radius: 0.5rem; border: none; text-decoration: none; display: inline-block; padding: 10px 20px; text-align: center;">Registrar</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

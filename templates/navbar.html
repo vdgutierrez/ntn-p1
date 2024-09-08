@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SISTEMA DE CONFERENCIAS nTn</title>
+    <link rel="stylesheet" href="inicio.component.css" />
+    <link rel="preconnect" href="https://fonts-googleapis.com">
+    <link rel="preconnect" href="https://fonts-gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <!-- Agregar los estilos de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Importar jQuery y Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <!-- Importar Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</head>
+<body >
+    <style>
+ header {
+    background: #000; /* Fondo negro */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 150px; /* Altura del header */
+    padding: 0 20px; /* Espaciado horizontal */
+    position: fixed;
+    width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    z-index: 100;
+    top: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo img {
+    height: 60px; /* Altura del logo */
+    width: auto; /* Ancho automático del logo */
+}
+
+.logo h1 {
+    color: #ffffff; /* Texto blanco */
+    font-size: 36px; /* Tamaño de fuente */
+    font-weight: 700;
+    margin: 0;
+    animation: fadeIn 2s ease-in-out; /* Animación */
+}
+
+.logo h1 span {
+    color: #00bcd4; /* Color del span */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+nav .btn {
+    font-size: 1rem; /* Tamaño de fuente */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: #00bcd4; /* Fondo azul claro */
+    color: #ffffff; /* Texto blanco */
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.3s;
+    text-decoration: none; /* Eliminar subrayado */
+    display: inline-block;
+}
+
+nav .btn:hover {
+    background: #0097a7; /* Fondo azul oscuro al pasar el ratón */
+    transform: scale(1.05); /* Efecto de agrandar */
+}
+
+input {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    nav {
+        position: absolute;
+        top: 80px; /* Ajuste para móviles */
+        background: #ffffff; /* Fondo blanco para móviles */
+        left: 0;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        height: 0;
+        transition: height 0.5s ease;
+        overflow: hidden;
+    }
+
+    nav a {
+        margin-top: 20px; /* Espaciado superior para los enlaces */
+    }
+
+    label {
+        width: 40px;
+        height: 30px;
+        position: relative;
+    }
+
+    label div {
+        width: 100%;
+        height: 5px;
+        background: #00bcd4; /* Color de las líneas del menú */
+        position: absolute;
+        border-radius: 2px;
+        transition: transform 0.3s, opacity 0.3s;
+    }
+
+    label div:nth-child(1) {
+        top: 0;
+    }
+
+    label div:nth-child(2) {
+        top: 50%;
+    }
+
+    label div:nth-child(3) {
+        top: 100%;
+    }
+
+    input:checked + header nav {
+        height: 100vh; /* Altura completa para el menú en móviles */
+    }
+
+    input:checked + header label div:nth-child(1) {
+        transform: rotate(45deg);
+        top: 50%;
+    }
+
+    input:checked + header label div:nth-child(3) {
+        transform: rotate(-45deg);
+        top: 50%;
+    }
+
+    input:checked + header label div:nth-child(2) {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+    </style>
+
+   
+<div class="page-container">
+<!-- MOBILE SCREEN -->
+<input type="checkbox" id="menu">
+<!-- END MOBILE SCREEN -->
+<header>
+<div class="logo">
+    <img class="logo rounded-circle me-2" src="{{ url_for('static', filename='assets/img/logo.jpg') }}" style="height: 150px; width: 160px;" alt="Logo">
+    <h1>EVENTOS <span> CHUNO</span></h1><br><br><br>
+</div>
+<!-- MOBILE SCREEN -->
+<label for="menu">
+    <div></div>
+    <div></div>
+    <div></div>
+</label>
+<!-- END MOBILE SCREEN -->
+<nav>
+    <a class="btn" href="{{ url_for('index') }}">Inicio</a>
+    <a class="btn" href="{{ url_for('login') }}">Login</a>
+</nav>
+</header>

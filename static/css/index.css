@@ -1,0 +1,563 @@
+
+/* Importar fuente desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap');
+
+* {
+    font-family: 'Inter', sans-serif; /* Aplicar la fuente Inter a toda la página */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0; /* Eliminar márgenes predeterminados */
+    padding: 0; /* Eliminar relleno predeterminado */
+}
+
+.page-container {
+    min-height: 100%;
+    background-color: #f8f9fa; /* Color de fondo más suave */
+}
+
+header {
+    background: #000; /* Fondo negro */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 150px; /* Ajuste de altura */
+    padding: 0 20px; /* Espaciado horizontal */
+    position: fixed;
+    width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Sombra más sutil */
+    z-index: 100;
+    top: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo img {
+    height: 60px; /* Ajuste de altura del logo */
+    width: auto; /* Ajuste automático del ancho */
+}
+
+.logo h1 {
+    color: #ffffff; /* Texto blanco */
+    font-size: 36px; /* Tamaño de fuente ajustado */
+    font-weight: 700;
+    margin: 0;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.logo h1 span {
+    color: #00bcd4; /* Color diferente para el span */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+nav .btn {
+    font-size: 1rem; /* Ajuste del tamaño de fuente */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: #00bcd4; /* Fondo azul claro */
+    color: #ffffff; /* Texto blanco */
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.3s;
+    text-decoration: none; /* Eliminar subrayado */
+    display: inline-block;
+}
+
+nav .btn:hover {
+    background: #0097a7; /* Fondo azul oscuro al pasar el ratón */
+    transform: scale(1.05); /* Efecto de agrandar */
+}
+
+input {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    nav {
+        position: absolute;
+        top: 80px; /* Ajuste para que no se sobreponga al header */
+        background: #ffffff; /* Fondo blanco para móviles */
+        left: 0;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        height: 0;
+        transition: height 0.5s ease;
+        overflow: hidden;
+    }
+
+    nav a {
+        margin-top: 20px; /* Espaciado superior para los enlaces */
+    }
+
+    label {
+        width: 40px;
+        height: 30px;
+        position: relative;
+    }
+
+    label div {
+        width: 100%;
+        height: 5px;
+        background: #00bcd4; /* Color de las líneas del menú */
+        position: absolute;
+        border-radius: 2px;
+        transition: transform 0.3s, opacity 0.3s;
+    }
+
+    label div:nth-child(1) {
+        top: 0;
+    }
+
+    label div:nth-child(2) {
+        top: 50%;
+    }
+
+    label div:nth-child(3) {
+        top: 100%;
+    }
+
+    input:checked + header nav {
+        height: 100vh; /* Altura completa para el menú en móviles */
+    }
+
+    input:checked + header label div:nth-child(1) {
+        transform: rotate(45deg);
+        top: 50%;
+    }
+
+    input:checked + header label div:nth-child(3) {
+        transform: rotate(-45deg);
+        top: 50%;
+    }
+
+    input:checked + header label div:nth-child(2) {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.carousel {
+    margin: 20px auto;
+    max-width: 100%;
+}
+
+.carousel-item img {
+    border-radius: 15px; /* Borde redondeado para imágenes */
+    height: 500px; /* Ajuste de altura */
+    object-fit: cover;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 5%;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+}
+
+.carousel-control-prev-icon::before, .carousel-control-next-icon::before {
+    color: white;
+}
+
+.container {
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 0 20px; /* Ajuste del padding */
+}
+
+.heading-1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 40px; /* Tamaño de fuente ajustado */
+    color: #333; /* Color de texto oscuro */
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.container-blogs {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card-blog {
+    flex-basis: calc(30% - 20px);
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.card-blog:hover {
+    transform: translateY(-10px); /* Mayor elevación en hover */
+}
+
+.container-img {
+    position: relative;
+}
+
+.container-img img {
+    width: 100%;
+    display: block;
+    border-radius: 10px 10px 0 0;
+}
+
+.button-group-blog {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.button-group-blog span {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px; /* Espacio entre iconos */
+}
+
+.content-blog {
+    padding: 20px;
+}
+
+.content-blog h2 {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.content-blog p {
+    text-align: justify;
+    margin-bottom: 0;
+}
+
+
+/*////////////*/
+  .fotos {
+    display: flex;
+    justify-content: center; /* Center the entire section horizontally */
+    align-items: center; /* Center the entire section vertically */
+    width: 100%; /* Ensure the section takes full width */
+    height: 500px; /* Fixed height */
+    margin: auto; /* Center the section on the page */
+    border-radius: 15%;
+    overflow: hidden; /* Ensure content stays within rounded border */
+    text-align: center;
+}
+
+.fotos > div {
+    display: flex;
+    justify-content: center; /* Center items horizontally within this div */
+    align-items: center; /* Center items vertically within this div */
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.fotos > div > div {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    align-items: center; /* Center content within each item */
+    position: relative; /* For positioning text over image */
+    margin: 10px; /* Add some margin around each item */
+}
+
+.imgbajo {
+    width: 40px; /* Set an initial width */
+    height: 700px; /* Set an initial height */
+    flex-grow: 5;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: all 0.8s ease; /* Transition for all properties */
+    border-radius: 10px; /* Optional: rounded corners for images */
+}
+
+.imgbajo:hover {
+    cursor: crosshair;
+    width: 1000px; /* Expanded width on hover */
+    opacity: 1;
+    filter: contrast(120%);
+}
+
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px #000; /* Add a shadow for better readability */
+    opacity: 0; /* Hide text initially */
+    transition: opacity 0.8s ease; /* Smooth transition for text visibility */
+}
+
+.fotos > div > div:hover .text-overlay {
+    opacity: 1; /* Show text on hover */
+}
+
+
+
+/*///////*/
+.top-categories {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	margin-bottom: 3rem;
+}
+
+.container-categories {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 3rem;
+}
+
+.card-category {
+	position: relative;
+	height: 20rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 2rem;
+	overflow: hidden; /* Para que la imagen no se desborde */
+	cursor: pointer;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-category:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.category-image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover; /* Para que la imagen se ajuste al contenedor */
+	position: absolute;
+	top: 0;
+	left: 0;
+	transition: opacity 0.3s ease;
+}
+
+.card-category:hover .category-image {
+	opacity: 0.8; /* Opacidad reducida en hover */
+}
+
+.card-category p {
+	font-size: 2.5rem; /* Tamaño de la categoría */
+	color: #fff;
+	text-transform: capitalize;
+	position: relative;
+	z-index: 1; /* Para que esté por encima de la imagen */
+}
+
+.card-category p::after {
+	content: '';
+	width: 2.5rem;
+	height: 2px;
+	background-color: #fff;
+	position: absolute;
+	bottom: -1rem;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.card-category span {
+	font-size: 1.6rem;
+	color: #fff;
+	opacity: 0; /* Inicialmente oculto */
+	transition: opacity 0.3s ease;
+}
+
+.card-category:hover span {
+	opacity: 1; /* Mostrar en hover */
+}
+.category-moca {
+	background-image: url("https://www.bizneo.com/blog/wp-content/uploads/2020/09/Flexibilidad-laboral-810x455.jpg");
+	background-size: cover;
+	background-position: bottom;
+	background-repeat: no-repeat;
+}
+
+.category-capuchino {
+	background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb9cT6SmYRxWpljXSPODCZGnXP1VAEqMw08A&s");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.category-expreso {
+	background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAqLBzRNLfQ80WTZdlTQXv2rDcAJnlkP0dlQ&s");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+
+
+
+.titulos {
+    font-family: 'Arial', sans-serif; /* Cambia la fuente según tus preferencias */
+    font-size: 50px; /* Tamaño de fuente más grande */
+    color: #333; /* Color de texto oscuro */
+    text-align: center; /* Centrar el texto */
+    margin-bottom: 20px; /* Espacio inferior */
+    text-transform: uppercase; /* Convertir texto a mayúsculas */
+    letter-spacing: 2px; /* Espaciado entre letras */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra de texto */
+    animation: fadeInUp 1s ease forwards; /* Animación fadeInUp */
+  }
+
+  /* Definición de la animación fadeInUp */
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
+  /* SSSSSSSSSSSSSSS */
+
+
+  .footer-content {
+    display: flex;
+    flex-direction: row; /* Cambio a dirección de fila */
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    padding: 20px;
+    background-color: grey ; /* Color de fondo del footer */
+    color: whitesmoke; /* Color del texto */
+    border-top: 10px solid grey\; /* Borde superior */
+}
+
+.footer-links {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-link {
+    color: whitesmoke; /* Color de los enlaces */
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 30px; /* Tamaño de fuente de los enlaces */
+    transition: color 0.3s ease; /* Transición suave */
+}
+
+.footer-link:hover {
+    color: white; /* Cambio de color en hover */
+}
+
+.footer-social {
+    margin-bottom: 40px;
+}
+
+.footer-social-link {
+    margin: 0 10px;
+    display: inline-block;
+    transition: transform 0.3s ease; /* Transición suave */
+}
+
+.footer-social-link:hover {
+    transform: scale(1.2); /* Escala al hacer hover */
+}
+
+.footer-social-icon {
+    width: 45px; /* Tamaño de los íconos de redes sociales */
+}
+
+.footer-sub {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 14px; /* Tamaño de fuente del footer */
+    opacity: 0.7; /* Opacidad del texto */
+}
+
+.body-small {
+    color: #fff; /* Color del texto */
+    opacity: 0.7; /* Opacidad del texto */
+    font-size: 30px;
+}
+
+/* Animación de entrada para el footer */
+.footer-content {
+    animation: slideInFromBottom 0.10s ease-out;
+}
+
+@keyframes slideInFromBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.contacto {
+    background-color: black; /* Fondo blanco */
+    padding: 20px; /* Espacio interno */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 500px; /* Ancho máximo */
+    margin: 0 auto; /* Centrar horizontalmente */
+    text-align: center; /* Texto centrado */
+}
+
+.contacto br {
+    display: none; /* Oculta los saltos de línea */
+}
+
+.contacto p {
+    margin: 10px 0; /* Margen superior e inferior */
+}
+ 

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %} Evaluación de Charlas {% endblock %}
+{% block content %}
+{% include 'asistente/navbar_asistente.html' %}<br><br><br>
+
+<section class="vh-100" style="background-color: #f0f0f0;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: #ffffff;">
+                    <div class="card-body p-4 p-lg-5 text-black">
+                        <h2 class="text-center mb-4" style="color: #00bcd4;">Evaluar Charlas</h2>
+                        
+                        <div id="charlas-evaluacion-list">
+                            {% for charla in charlas %}
+                            <div class="charla-block" style="background-color: #ffffff; border: 1px solid #ddd; border-radius: 0.5rem; padding: 20px; margin-bottom: 20px;">
+                                <h4 style="color: #00bcd4;">{{ charla.titulo }}</h4>
+                                <p><strong>Descripción:</strong> {{ charla.detalle }}</p>
+                                <p><strong>Hora:</strong> {{ charla.hora.strftime('%H:%M') }}</p>
+                                <p><strong>Ubicación:</strong> {{ charla.sala }}</p>
+
+                                <!-- Formulario de Evaluación -->
+                                <form action="/evaluar/{{ charla.id_charla }}" method="POST">
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="puntuacion">Puntuación (1-5):</label>
+                                        <select id="puntuacion" name="puntuacion" class="form-select form-control-lg" required>
+                                            <option value="1">1 - Muy Mala</option>
+                                            <option value="2">2 - Mala</option>
+                                            <option value="3">3 - Regular</option>
+                                            <option value="4">4 - Buena</option>
+                                            <option value="5">5 - Excelente</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-outline mb-4">
+                                        <textarea id="comentario" name="comentario" class="form-control form-control-lg" rows="3" placeholder="Deja tu comentario" required></textarea>
+                                        <label class="form-label" for="comentario">Comentarios</label>
+                                    </div>
+
+                                    <div class="text-center mb-4">
+                                        <button type="submit" class="btn btn-lg" style="background-color: #00bcd4; color: white; border-radius: 0.5rem; border: none;">Enviar Evaluación</button>
+                                    </div>
+                                </form>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.charla-block {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.charla-block:hover {
+    transform: translateY(-5px);
+}
+</style>
+
+{% endblock %}

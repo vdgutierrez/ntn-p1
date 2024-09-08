@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %} Programar Reuniones {% endblock %}
+{% block content %}
+{% include 'admin/navbar_admin.html' %}<br><br><br>
+
+<section class="vh-100" style="background-color: #f0f0f0;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: #ffffff;">
+                    <div class="card-body p-4 p-lg-5 text-black">
+                        <h2 class="text-center mb-4" style="color: #00bcd4;">Programar Conferencia</h2>
+                        <form id="conference-form" method="POST" action="/conferencias">
+                            <div class="form-outline mb-4">
+                                <input type="text" id="conference-title" name="title" class="form-control form-control-lg" placeholder=" " required />
+                                <label class="form-label" for="conference-title">Nombre de la Conferencia</label>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input type="text" id="conference-location" name="location" class="form-control form-control-lg" placeholder=" " required />
+                                <label class="form-label" for="conference-location">Ubicación</label>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input type="date" id="conference-start-date" name="start_date" class="form-control form-control-lg" required />
+                                <label class="form-label" for="conference-start-date">Fecha de Inicio</label>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input type="date" id="conference-end-date" name="end_date" class="form-control form-control-lg" required />
+                                <label class="form-label" for="conference-end-date">Fecha Final</label>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input type="url" id="conference-link" name="link" class="form-control form-control-lg" placeholder=" " required />
+                                <label class="form-label" for="conference-link">Enlace</label>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <textarea id="conference-description" name="description" class="form-control form-control-lg" rows="4" placeholder=" " required></textarea>
+                                <label class="form-label" for="conference-description">Descripción</label>
+                            </div>
+
+                            <div class="text-center mb-4">
+                                <button type="submit" class="btn btn-lg" style="background-color: #00bcd4; color: white; border-radius: 0.5rem; border: none;">Guardar Conferencia</button>
+                            </div>
+                        </form>
+
+                        <h3 class="text-center mb-4" style="color: #00bcd4;">Conferencias Programadas</h3>
+                        <div id="conferences-list">
+                            {% for conference in conferences %}
+                            <div class="conference-block" style="background-color: #ffffff; border: 1px solid #ddd; border-radius: 0.5rem; padding: 10px; margin-bottom: 10px;">
+                                <h5>{{ conference.nombre }}</h5>
+                                <p><strong>Ubicación:</strong> {{ conference.ubicacion }}</p>
+                                <p><strong>Fecha de Inicio:</strong> {{ conference.f_inicio }}</p>
+                                <p><strong>Fecha Final:</strong> {{ conference.f_fin }}</p>
+                                <p><strong>Descripción:</strong> {{ conference.detalle }}</p>
+                                <p><strong>Enlace:</strong> <a href="{{ conference.enlace }}" target="_blank" style="color: #00bcd4;">{{ conference.enlace }}</a></p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.conference-block {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+</style>
+
+{% endblock %}

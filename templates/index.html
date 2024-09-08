@@ -1,95 +1,215 @@
-<!doctype html>
-<html lang="en" class="h-100">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
-    <title>CHUNO EVENTOS</title>
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-      .btn-secondary,
-      .btn-secondary:hover,
-      .btn-secondary:focus {
-        color: #333;
-        text-shadow: none; /* Prevent inheritance from `body` */
-      }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SISTEMA DE CONFERENCIAS nTn</title>
+    <link rel="stylesheet" href="inicio.component.css" />
+    <link rel="preconnect" href="https://fonts-googleapis.com">
+    <link rel="preconnect" href="https://fonts-gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 
-      body {
-        text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-        box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
-      }
-
-      .cover-container {
-        max-width: 42em;
-      }
-
-      .nav-masthead .nav-link {
-        padding: .25rem 0;
-        font-weight: 700;
-        color: rgba(255, 255, 255, .5);
-        background-color: transparent;
-        border-bottom: .25rem solid transparent;
-      }
-
-      .nav-masthead .nav-link:hover,
-      .nav-masthead .nav-link:focus {
-        border-bottom-color: rgba(255, 255, 255, .25);
-      }
-
-      .nav-masthead .nav-link + .nav-link {
-        margin-left: 1rem;
-      }
-
-      .nav-masthead .active {
-        color: #fff;
-        border-bottom-color: #fff;
-      }
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-  </head>
-  <body class="d-flex h-100 text-center text-white bg-dark">
+    <!-- Agregar los estilos de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Importar jQuery y Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <!-- Importar Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</head>
+<body >
     
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="mb-auto">
-    <div>
-      <h3 class="float-md-start mb-0">CHUNO EVENTOS</h3>
-      <nav class="nav nav-masthead justify-content-center float-md-end">
-        <a class="nav-link active" aria-current="page" href="#">HOME</a>
-        <a class="nav-link" href="register">REGISTRARSE</a>
-        <a class="nav-link" href="login">INGRESAR</a>
-      </nav>
+    <div class="page-container">
+<!-- MOBILE SCREEN -->
+<input type="checkbox" id="menu">
+<!-- END MOBILE SCREEN -->
+<header>
+    <div class="logo">
+        <img class="logo rounded-circle me-2" src="{{ url_for('static', filename='assets/img/logo.jpg') }}" style="height: 150px; width: 160px;" alt="Logo">
+        <h1>EVENTOS <span> CHUNO</span></h1><br><br><br>
     </div>
-  </header>
+    <!-- MOBILE SCREEN -->
+    <label for="menu">
+        <div></div>
+        <div></div>
+        <div></div>
+    </label>
+    <!-- END MOBILE SCREEN -->
+    <nav>
+        <a class="btn" href="/">Inicio</a>
+        <a class="btn" href="{{ url_for('login') }}">Login</a>
+        <a class="btn" href="admin/register">admin</a>
+        <a class="btn" href="asistente/conferencias">admin</a>
 
-  <main class="px-3">
-    <h1>Cover your page.</h1>
-    <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-    <p class="lead">
-      <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a>
-    </p>
-  </main>
 
-  <footer class="mt-auto text-white-50">
-    <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
-  </footer>
-</div>
 
+
+    </nav>
+</header>
+
+<br><br><br><br><br><br><br>
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <section class="carousel">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ url_for('static', filename='assets/img/gallery1.jpeg') }}" class="d-block w-100" alt="Gallery Img1">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='assets/img/gallery2.jpeg') }}" class="d-block w-100" alt="Gallery Img2">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='assets/img/gallery3.jpeg') }}" class="d-block w-100" alt="Gallery Img3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+<br>
+
+<section class="container blogs">
+    <h1 class="heading-1">Acerca de Nosotros</h1>
+    <br>
+    <div class="container-blogs">
+        <div class="card-blog">
+            <div class="container-img">
+                <img src="{{ url_for('static', filename='assets/img/blog-1.png') }}" alt="Imagen Blog 1" />
+                <div class="button-group-blog">
+                    <span>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="content-blog" style="text-align: justify;">
+                <h2 style="font-size: 1.5em; text-align: center;">Misión</h2>
+                <span></span>
+                <p>
+                    "Proporcionar una experiencia integral y de alta calidad en la gestión de conferencias, ofreciendo herramientas eficientes para la planificación, ejecución y evaluación de eventos, y garantizando un entorno profesional que fomente el aprendizaje y la colaboración."
+
+                </p>
+            </div>
+        </div>
+        <div class="card-blog">
+            <div class="container-img">
+                <img src="{{ url_for('static', filename='assets/img/blog-2.webp') }}" alt="Imagen Blog 2" />
+                <div class="button-group-blog">
+                    <span>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="content-blog" style="text-align: justify;">
+                <h2 style="font-size: 1.5em;">Visión</h2>
+                <span></span>
+                <p>
+                    "Ser la plataforma líder en la organización y promoción de conferencias, eventos y charlas, facilitando la conexión entre expertos y asistentes para el intercambio de conocimiento, innovación y desarrollo profesional."                </p>
+            </div>
+        </div>
+        <div class="card-blog">
+            <div class="container-img">
+                <img src="{{ url_for('static', filename='assets/img/blog-3.png') }}" alt="Imagen Blog 3" />
+                <div class="button-group-blog">
+                    <span>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="content-blog" style="text-align: justify;">
+                <h2 style="font-size: 1.5em;">Servicios</h2>
+                <span></span>
+                <p>
+                    "Ofrecemos una gama completa de servicios para la organización y gestión de conferencias. Nuestro objetivo es garantizar que cada conferencia se desarrolle sin contratiempos, brindando una experiencia fluida tanto para los organizadores como para los asistentes, y maximizando el impacto y la eficacia de cada evento."                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<br><br><br>
+
+<section class="container top-categories">
+	<h1 class="heading-1">LA MEJOR PLATAFORMA PARA TUS CONFERENCIAS</h1><br>
+
+	<div class="container-categories">
+		<div class="card-category category-moca">
+
+			<p>FLEXIBLE</p>
+		</div>
+		<div class="card-category category-expreso">
+			<p>INCLUSIVO</p>
+		</div>
+		<div class="card-category category-capuchino">
+			<p>SEGURO</p>
+		</div>
+		
+	</div>
+	
+</section>
+
+
+
+<section>
+    <div class="footer-content">
+        <img src="assets/img/" loading="lazy" width="35" alt="" class="footer-logo">
+        <div class="footer-links">
+            <a href="/contact" class="footer-link">Contactos:</a>
+			<h2 class="contacto">Teléfono: +591 60545564 <br> <br>
+            </h2>
+        </div>
+        <div class="footer-social">
+            <a href="https://whatsapp.com" target="_blank" class="footer-social-link w-inline-block">
+				<img src="https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo-whatsapp-256.png" loading="lazy" alt="WhatsApp" class="footer-social-icon">
+			</a>
+			
+            <a href="https://maps.app.goo.gl/E8r49KAyudis5Ug4A" target="_blank" class="footer-social-link w-inline-block">
+                <img src="https://cdn1.iconfinder.com/data/icons/travel-90/100/Map_2_world_ubication_diagram_travel-256.png" loading="lazy" alt="" class="footer-social-icon">
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" class="footer-social-link w-inline-block">
+                <img src="https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/62-instagram-256.png" loading="lazy" alt="" class="footer-social-icon">
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100064701069513" target="_blank" class="footer-social-link w-inline-block">
+                <img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/facebook-256.png" loading="lazy" alt="" class="footer-social-icon">
+            </a>
+        </div>
+      
+    </div>
+</section>
+
+
+
+	</div>
 
     
-  </body>
-</html>
+</body>
+</html> 

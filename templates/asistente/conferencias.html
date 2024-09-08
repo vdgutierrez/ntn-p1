@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %} Conferencias {% endblock %}
+{% block content %}
+{% include 'asistente/navbar_asistente.html' %}<br><br><br>
+
+<section class="vh-100" style="background-color: #f0f0f0;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: #ffffff;">
+                    <div class="card-body p-4 p-lg-5 text-black">
+                        <h2 class="text-center mb-4" style="color: #00bcd4;">Conferencias Programadas</h2>
+                        <div id="conferences-list">
+                            {% for conference in conferences %}
+                            <div class="conference-block" style="background-color: #ffffff; border: 1px solid #ddd; border-radius: 0.5rem; padding: 20px; margin-bottom: 20px;">
+                                <h4 style="color: #00bcd4;">{{ conference.nombre }}</h4>
+                                <p><strong>Ubicación:</strong> {{ conference.ubicacion }}</p>
+                                <p><strong>Fecha de Inicio:</strong> {{ conference.f_inicio.strftime('%Y-%m-%d') }}</p>
+                                <p><strong>Fecha Final:</strong> {{ conference.f_fin.strftime('%Y-%m-%d') }}</p>
+                                <p><strong>Descripción:</strong> {{ conference.detalle }}</p>
+                                <p><strong>Enlace:</strong> <a href="{{ conference.enlace }}" target="_blank" style="color: #00bcd4;">Ir a la Conferencia</a></p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.conference-block {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.conference-block:hover {
+    transform: translateY(-5px);
+}
+</style>
+
+{% endblock %}

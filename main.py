@@ -11,7 +11,36 @@ def index():
 def login():
     return render_template('login.html')
 
-@app.route('/register', methods=['GET','POST'])
+@app.route('/navbar')
+def navbar():
+    return render_template('navbar.html')
+
+@app.route('/admin/registro_conferencia')
+def conferencia():
+    return render_template('admin/registro_conferencia.html')
+
+@app.route('/admin/navbar_admin')
+def navbar_admin():
+    return render_template('admi/navbar_admin.html')
+
+@app.route('/asistente/conferencias')
+def conferencias():
+    return render_template('asistente/conferencias.html')
+
+@app.route('/asistente/votacion')
+def votacion():
+    return render_template('asistente/votacion.html')
+
+@app.route('/asistente/evaluacion')
+def evaluacion():
+    return render_template('asistente/evaluacion.html')
+
+@app.route('/asistente/navbar_asistente')
+def navbar_asistente():
+    return render_template('admi/navbar_asistente.html')
+
+
+@app.route('/admin/register', methods=['GET','POST'])
 def register():
     print(request.form)
     if request.method == 'POST':
@@ -34,7 +63,7 @@ def register():
         if tipo == 'Orador':
             insert_orador(name, lastname)
 
-    return render_template('register.html')
+    return render_template('admin/register.html')
 
 @app.route('/metting')
 def metting():
@@ -48,13 +77,6 @@ def login_user():
         print(username)
         print(password)
     return 'received'
-
-
-
-
-
-
-
 
 
 
