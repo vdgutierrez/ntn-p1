@@ -2,7 +2,6 @@
 {% block title %} Votación de Charlas {% endblock %}
 {% block content %}
 {% include 'asistente/navbar_asistente.html' %}<br><br><br>
-<br><br><br>
 
 <section class="vh-100" style="background-color: #f0f0f0;">
     <div class="container py-5 h-100">
@@ -21,12 +20,15 @@
                                 <p><strong>Ubicación:</strong> {{ charla.sala }}</p>
 
                                 <div class="voting-buttons">
-                                    <form action="/votar/{{ charla.id_charla }}" method="POST" class="d-inline">
+                                    <form action="{{ url_for('votacion') }}" method="POST" class="d-inline">
+                                        <input type="hidden" name="charla_id" value="{{ charla.id_charla }}" />
                                         <button type="submit" name="voto" value="1" class="btn btn-success" style="background-color: #00bcd4; color: white; border-radius: 0.5rem;">Votar a Favor</button>
                                     </form>
-                                    <form action="/votar/{{ charla.id_charla }}" method="POST" class="d-inline">
+                                    <form action="{{ url_for('votacion') }}" method="POST" class="d-inline">
+                                        <input type="hidden" name="charla_id" value="{{ charla.id_charla }}" />
                                         <button type="submit" name="voto" value="0" class="btn btn-danger" style="background-color: #f44336; color: white; border-radius: 0.5rem;">Votar en Contra</button>
                                     </form>
+                                    
                                 </div>
                             </div>
                             {% endfor %}

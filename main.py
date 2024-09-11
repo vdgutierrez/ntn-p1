@@ -113,9 +113,53 @@ def conferencias():
     return render_template('asistente/conferencias.html', conferences=conferences)
 
 
-@app.route('/asistente/votacion')
+@app.route('/asistente/votacion', methods=['GET', 'POST'])
 def votacion():
-    return render_template('asistente/votacion.html')
+    if request.method == 'POST':
+        charla_id = request.form.get('charla_id')
+        voto = request.form.get('voto')
+        id_asistente = 3 
+        
+        print(charla_id, voto, id_asistente)
+        if not charla_id or voto not in ['0', '1']:
+            return "Todos los campos son obligatorios y el voto debe ser 0 o 1", 400
+
+        # Conectar a la base de datos
+        connection = db_connection()
+        cursor = connection.cursor()
+
+        # Insertar el voto en la base de datos
+        query = """
+        INSERT INTO votacion (ID_CHARLA, ID_ASISTENTE, VOTO)
+        VALUES (%s, %s, %s)
+        """
+        values = (int(charla_id), int(id_asistente), int(voto))
+
+        cursor.execute(query, values)
+        connection.commit()
+
+        # Cerrar la conexión
+        cursor.close()
+        connection.close()
+
+        # Redirigir a la página de votación para mostrar la lista actualizada
+        return redirect(url_for('votacion'))
+
+    # Conectar a la base de datos
+    connection = db_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    # Consultar las charlas
+    cursor.execute("SELECT id_charla, titulo, detalle, hora, idsala FROM charla")
+    charlas = cursor.fetchall()
+
+    # Cerrar la conexión
+    cursor.close()
+    connection.close()
+
+    # Renderizar la plantilla con la lista de charlas
+    return render_template('asistente/votacion.html', charlas=charlas)
+
 
 @app.route('/asistente/evaluar', methods=['GET', 'POST'])
 def evaluar():
