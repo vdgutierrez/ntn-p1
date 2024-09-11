@@ -1,14 +1,22 @@
 import mysql.connector as mysql
+from mysql.connector import Error
 
 def db_connection():
-    conexion = mysql.connect(
-        host="sql10.freemysqlhosting.net",
-        user="sql10729427",
-        password="ji7RdGLaZq",
-        database="sql10729427",
-        port=3306
-    )
-    print(conexion)
+    try:
+        conexion = mysql.connect(
+            host="localhost",
+            user="root2",
+            password="12345678",
+            database="Arqui1",
+            port=3308
+        )
+        if conexion.is_connected():
+            print("Conexión exitosa")
+            return conexion
+    except Error as e:
+        print(f"Error al conectar a la base de datos: {e}")
+        return None
+
     return conexion
 
 def read_data():

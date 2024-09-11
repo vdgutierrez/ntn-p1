@@ -1,14 +1,42 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash, session, redirect, url_for
 from business import *
 
 app = Flask(__name__)
+app.secret_key = 'Arqui123'
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/login')
+# @app.route('/login')
+# def login():
+#     return render_template('login.html')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        # Obtener los datos del formulario
+        email = request.form.get('email')
+        password = request.form.get('password')
+        
+        # Usar la función db_connection() para conectar a la base de datos
+        conexion = db_connection()
+        if conexion:
+            cursor = conexion.cursor(dictionary=True)
+            # Verificar si el usuario existe en la base de datos
+            cursor.execute('SELECT * FROM PERFIL WHERE CORREO = %s AND CONTRASENA = %s', (email, password))
+            user = cursor.fetchone()
+            conexion.close()  # Cierra la conexión después de la consulta
+            
+            if user:
+            
+                return redirect(url_for('conferencias'))  # Usa el nombre de la función de ruta
+            else:
+                flash('Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.', 'error')
+                return redirect(url_for('login'))
+        else:
+            flash('Error al conectar a la base de datos.', 'error')
+            return redirect(url_for('login'))
+    
     return render_template('login.html')
 
 @app.route('/navbar')
