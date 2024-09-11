@@ -17,10 +17,11 @@
                                 <h4 style="color: #00bcd4;">{{ charla.titulo }}</h4>
                                 <p><strong>Descripción:</strong> {{ charla.detalle }}</p>
                                 <p><strong>Hora:</strong> {{ charla.hora.strftime('%H:%M') }}</p>
-                                <p><strong>Ubicación:</strong> {{ charla.sala }}</p>
+                                <p><strong>Ubicación:</strong> {{ charla.idsala }}</p>
 
                                 <!-- Formulario de Evaluación -->
-                                <form action="/evaluar/{{ charla.id_charla }}" method="POST">
+                                <form action="{{ url_for('evaluar') }}" method="POST">
+                                    <input type="hidden" name="charla_id" value="{{ charla.id_charla }}">
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="puntuacion">Puntuación (1-5):</label>
                                         <select id="puntuacion" name="puntuacion" class="form-select form-control-lg" required>

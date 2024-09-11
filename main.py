@@ -117,9 +117,74 @@ def conferencias():
 def votacion():
     return render_template('asistente/votacion.html')
 
-@app.route('/asistente/evaluacion')
-def evaluacion():
-    return render_template('asistente/evaluacion.html')
+@app.route('/asistente/evaluar', methods=['GET', 'POST'])
+def evaluar():
+    if request.method == 'POST':
+        charla_id = request.form.get('charla_id')
+        puntuacion = request.form.get('puntuacion')
+        comentario = request.form.get('comentario')
+        print(charla_id, puntuacion, comentario)
+        
+        # Verificar que todos los campos se han llenado
+        if not all([charla_id, puntuacion, comentario]):
+            return "Todos los campos son obligatorios", 400
+
+        # Aquí debes obtener el ID del asistente de la sesión o algún otro método
+        id_asistente = 3  # Obtén el ID del asistente desde la sesión o de otra forma
+
+        # Insertar evaluación en la base de datos
+        insert_evaluacion(charla_id, puntuacion, comentario, id_asistente)
+        
+        # Redirigir a la misma página para mostrar la lista actualizada de charlas
+        return redirect(url_for('evaluar'))
+    
+    # Conectar a la base de datos
+    connection = db_connection()
+    cursor = connection.cursor(dictionary=True)
+    
+    # Consultar las charlas
+    cursor.execute("SELECT id_charla, titulo, detalle, hora, idsala FROM charla")
+    charlas = cursor.fetchall()
+
+    # Cerrar la conexión
+    cursor.close()
+    connection.close()
+    
+    # Pasar los datos a la plantilla
+    return render_template('asistente/evaluar.html', charlas=charlas)
+
+
+def insert_evaluacion(charla_id, puntuacion, comentario, id_asistente):
+    connection = db_connection()
+    cursor = connection.cursor()
+
+    # SQL para insertar la evaluación
+    query = """
+    INSERT INTO evaluacion (METODO, PUNTAJE, COMENTARIO, FECHA_EVALUACION, ID_ASISTENTE, ID_CONFERENCIA)
+    VALUES (%s, %s, %s, NOW(), %s, %s)
+    """
+    values = ('online', puntuacion, comentario, id_asistente, charla_id)
+
+    cursor.execute(query, values)
+    connection.commit()
+
+    cursor.close()
+    connection.close()
+
+
+@app.route('/evaluar/<int:charla_id>', methods=['POST'])
+def evaluar_charla(charla_id):
+    puntuacion = request.form.get('puntuacion')
+    comentario = request.form.get('comentario')
+    id_asistente = 3
+
+    # Verifica que todos los campos se han llenado
+    if not all([puntuacion, comentario]):
+        return "Todos los campos son obligatorios", 400
+
+    insert_evaluacion(charla_id, puntuacion, comentario, id_asistente)
+
+    return redirect(url_for('conferencias'))
 
 @app.route('/asistente/navbar_asistente')
 def navbar_asistente():
