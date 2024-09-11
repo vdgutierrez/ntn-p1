@@ -43,9 +43,53 @@ def login():
 def navbar():
     return render_template('navbar.html')
 
-@app.route('/admin/registro_conferencia')
+@app.route('/admin/registro_conferencia', methods=['GET', 'POST'])
 def conferencia():
-    return render_template('admin/registro_conferencia.html')
+    if request.method == 'POST':
+        # Obtener datos del formulario
+        title = request.form.get('title')
+        location = request.form.get('location')
+        start_date = request.form.get('start_date')
+        end_date = request.form.get('end_date')
+        link = request.form.get('link')
+        description = request.form.get('description')
+        
+        # Verificar que todos los campos se han llenado
+        if not all([title, location, start_date, end_date, link, description]):
+            return "Todos los campos son obligatorios", 400
+        print(str(title)+" "+str(location)+" "+str(start_date)+" "+str(end_date)+" "+str(link)+" "+str(description))
+        # Insertar datos en la base de datos
+        insert_conference(title, location, start_date, end_date, description, link)
+        
+        # Redirigir a la misma página para mostrar el formulario y la lista actualizada de conferencias
+        return redirect('/asistente/conferencias')
+    
+    # Conectar a la base de datos
+    connection = db_connection()
+    cursor = connection.cursor(dictionary=True)
+    
+    # Consultar las conferencias
+    cursor.execute("SELECT nombre, detalle, f_inicio, f_fin, ubicacion, marca FROM conferencia ORDER BY id_conferencia DESC")
+    conferences = cursor.fetchall()
+
+    # Cerrar la conexión
+    cursor.close()
+    connection.close()
+    
+    # Pasar los datos a la plantilla
+    return render_template('/admin/registro_conferencia.html', conferences=conferences)
+
+def insert_conference(nombre, ubicacion, f_inicio, f_fin, detalle, marca):
+    connection = db_connection()
+    cursor = connection.cursor()
+    cursor.execute("""
+        INSERT INTO conferencia (nombre, detalle, f_inicio, f_fin, ubicacion, marca, ID_organizador)
+        VALUES (%s, %s, %s, %s, %s, %s, 1)
+    """, (nombre, detalle, f_inicio, f_fin, ubicacion, marca))
+    connection.commit()
+    cursor.close()
+    connection.close()
+
 
 @app.route('/admin/navbar_admin')
 def navbar_admin():
@@ -53,7 +97,21 @@ def navbar_admin():
 
 @app.route('/asistente/conferencias')
 def conferencias():
-    return render_template('asistente/conferencias.html')
+    # Conectar a la base de datos
+    connection = db_connection()
+    cursor = connection.cursor(dictionary=True)
+    
+    # Consultar las conferencias
+    cursor.execute("SELECT nombre, detalle, f_inicio, f_fin, ubicacion, marca FROM conferencia ORDER BY id_conferencia DESC")
+    conferences = cursor.fetchall()
+
+    # Cerrar la conexión
+    cursor.close()
+    connection.close()
+    
+    # Pasar los datos a la plantilla
+    return render_template('asistente/conferencias.html', conferences=conferences)
+
 
 @app.route('/asistente/votacion')
 def votacion():

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} Programar Reuniones {% endblock %}
 {% block content %}
-{% include 'admin/navbar_admin.html' %}<br><br><br>
+{% include 'admin/navbar_admin2.html' %}<br><br><br>
 
 <section class="vh-100" style="background-color: #f0f0f0;">
     <div class="container py-5 h-100">
@@ -10,34 +10,34 @@
                 <div class="card" style="border-radius: 1rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: #ffffff;">
                     <div class="card-body p-4 p-lg-5 text-black">
                         <h2 class="text-center mb-4" style="color: #00bcd4;">Programar Conferencia</h2>
-                        <form id="conference-form" method="POST" action="/conferencias">
+                        <form id="conference-form" method="POST" action="/admin/registro_conferencia">
                             <div class="form-outline mb-4">
-                                <input type="text" id="conference-title" name="title" class="form-control form-control-lg" placeholder=" " required />
+                                <input type="text" id="title" name="title" class="form-control form-control-lg" placeholder=" " required />
                                 <label class="form-label" for="conference-title">Nombre de la Conferencia</label>
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input type="text" id="conference-location" name="location" class="form-control form-control-lg" placeholder=" " required />
+                                <input type="text" id="location" name="location" class="form-control form-control-lg" placeholder=" " required />
                                 <label class="form-label" for="conference-location">Ubicación</label>
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input type="date" id="conference-start-date" name="start_date" class="form-control form-control-lg" required />
+                                <input type="date" id="start-date" name="start_date" class="form-control form-control-lg" required />
                                 <label class="form-label" for="conference-start-date">Fecha de Inicio</label>
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input type="date" id="conference-end-date" name="end_date" class="form-control form-control-lg" required />
+                                <input type="date" id="end-date" name="end_date" class="form-control form-control-lg" required />
                                 <label class="form-label" for="conference-end-date">Fecha Final</label>
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input type="url" id="conference-link" name="link" class="form-control form-control-lg" placeholder=" " required />
+                                <input type="url" id="link" name="link" class="form-control form-control-lg" placeholder=" " required />
                                 <label class="form-label" for="conference-link">Enlace</label>
                             </div>
 
                             <div class="form-outline mb-4">
-                                <textarea id="conference-description" name="description" class="form-control form-control-lg" rows="4" placeholder=" " required></textarea>
+                                <textarea id="description" name="description" class="form-control form-control-lg" rows="4" placeholder=" " required></textarea>
                                 <label class="form-label" for="conference-description">Descripción</label>
                             </div>
 

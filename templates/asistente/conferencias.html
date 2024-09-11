@@ -14,11 +14,11 @@
                             {% for conference in conferences %}
                             <div class="conference-block" style="background-color: #ffffff; border: 1px solid #ddd; border-radius: 0.5rem; padding: 20px; margin-bottom: 20px;">
                                 <h4 style="color: #00bcd4;">{{ conference.nombre }}</h4>
-                                <p><strong>Ubicación:</strong> {{ conference.ubicacion }}</p>
+                                <p><strong>Detalle:</strong> {{ conference.detalle }}</p>
                                 <p><strong>Fecha de Inicio:</strong> {{ conference.f_inicio.strftime('%Y-%m-%d') }}</p>
                                 <p><strong>Fecha Final:</strong> {{ conference.f_fin.strftime('%Y-%m-%d') }}</p>
-                                <p><strong>Descripción:</strong> {{ conference.detalle }}</p>
-                                <p><strong>Enlace:</strong> <a href="{{ conference.enlace }}" target="_blank" style="color: #00bcd4;">Ir a la Conferencia</a></p>
+                                <p><strong>Ubicación:</strong> {{ conference.ubicacion }}</p>
+                                <p><strong>Marca:</strong> <a href="{{ conference.marca }}" target="_blank" style="color: #00bcd4;">Ir a la Conferencia</a></p>
                             </div>
                             {% endfor %}
                         </div>
