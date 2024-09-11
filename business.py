@@ -5,9 +5,9 @@ def db_connection():
     try:
         conexion = mysql.connect(
             host="localhost",
-            user="root2",
+            user="root1",
             password="12345678",
-            database="Arqui1",
+            database="Arqui2",
             port=3308
         )
         if conexion.is_connected():

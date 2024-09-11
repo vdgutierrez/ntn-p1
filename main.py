@@ -68,30 +68,138 @@ def navbar_asistente():
     return render_template('admi/navbar_asistente.html')
 
 
-@app.route('/admin/register', methods=['GET','POST'])
-def register():
-    print(request.form)
-    if request.method == 'POST':
-        name = request.form['name']
-        lastname = request.form['lastname']
-        email = request.form['email']
-        password = request.form['password']
-        tipo = request.form['tipo']
-        print(name)
-        print(lastname)
-        print(email)
-        print(password)
-        print(tipo)
-        insert_perfil(name, lastname, email, password, tipo)
-        if tipo == 'Asistente':
-            insert_asistente(name, lastname)
-        if tipo == 'Organizador':
-            insert_organizador(name, lastname)
+# @app.route('/admin/register', methods=['GET','POST'])
+# def register():
+#     print(request.form)
+#     if request.method == 'POST':
+#         name = request.form['name']
+#         lastname = request.form['lastname']
+#         email = request.form['email']
+#         password = request.form['password']
+#         tipo = request.form['tipo']
+#         print(name)
+#         print(lastname)
+#         print(email)
+#         print(password)
+#         print(tipo)
+#         insert_perfil(name, lastname, email, password, tipo)
+#         if tipo == 'Asistente':
+#             insert_asistente(name, lastname)
+#         if tipo == 'Organizador':
+#             insert_organizador(name, lastname)
         
-        if tipo == 'Orador':
-            insert_orador(name, lastname)
+#         if tipo == 'Orador':
+#             insert_orador(name, lastname)
 
-    return render_template('admin/register.html')
+#     return render_template('admin/register.html')
+
+def insert_perfil(name, lastname, email, password, tipo):
+    conexion = db_connection()
+    if conexion is None:
+        return
+    try:
+        cursor = conexion.cursor()
+        usuario = f"{name} {lastname}"
+        cursor.execute(
+            "INSERT INTO PERFIL (USUARIO, CONTRASENA, CORREO, TIPO) VALUES (%s, %s, %s, %s)",
+            (usuario, password, email, tipo)
+        )
+        conexion.commit()
+
+        id_perfil = cursor.lastrowid
+        if tipo == 'asistente':
+            insert_asistente(name, lastname, id_perfil)
+        elif tipo == 'organizador':
+            insert_organizador(name, lastname, id_perfil)
+        elif tipo == 'orador':
+            insert_orador(name, lastname, id_perfil)
+        else:
+            return "Tipo de usuario no válido", 400
+
+    except Error as e:
+        print(f"Error al insertar en PERFIL: {e}")
+    finally:
+        cursor.close()
+        conexion.close()
+
+def insert_asistente(name, lastname, id_perfil):
+    conexion = db_connection()
+    if conexion is None:
+        return
+    try:
+        cursor = conexion.cursor()
+        cursor.execute(
+            "INSERT INTO ASISTENTE (NOMBRES, APELLIDOS,ID_PERFIL) VALUES (%s, %s, %s)",
+            (name, lastname, id_perfil)
+        )
+        conexion.commit()
+    except Error as e:
+        print(f"Error al insertar en ASISTENTE: {e}")
+    finally:
+        cursor.close()
+        conexion.close()
+
+def insert_organizador(name, lastname, id_perfil):
+    conexion = db_connection()
+    if conexion is None:
+        return
+    try:
+        cursor = conexion.cursor()
+        cursor.execute(
+            "INSERT INTO ORGANIZADOR (NOMBRES, APELLIDOS, ID_PERFIL) VALUES (%s, %s, %s)",
+            (name, lastname, id_perfil)
+        )
+        conexion.commit()
+    except Error as e:
+        print(f"Error al insertar en ORGANIZADOR: {e}")
+    finally:
+        cursor.close()
+        conexion.close()
+
+def insert_orador(name, lastname, id_perfil):
+    conexion = db_connection()
+    if conexion is None:
+        return
+    try:
+        cursor = conexion.cursor()
+        cursor.execute(
+            "INSERT INTO ORADOR (NOMBRES, APELLIDOS, ID_PERFIL) VALUES (%s, %s, %s)",
+            (name, lastname, id_perfil)
+        )
+        conexion.commit()
+    except Error as e:
+        print(f"Error al insertar en ORADOR: {e}")
+    finally:
+        cursor.close()
+        conexion.close()
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        lastname = request.form.get('lastname')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        tipo = request.form.get('tipo')
+        
+        print(f"Nombre: {name}")
+        print(f"Apellido: {lastname}")
+        print(f"Correo: {email}")
+        print(f"Contraseña: {password}")
+        print(f"Tipo: {tipo}")
+
+        # Verifica que todos los campos se han llenado
+        if not all([name, lastname, email, password, tipo]):
+            return "Todos los campos son obligatorios", 400
+
+        # Inserta datos en la base de datos
+        insert_perfil(name, lastname, email, password, tipo)
+
+        return redirect(url_for('conferencias'))
+
+    return render_template('register.html')
+
+
 
 @app.route('/metting')
 def metting():
